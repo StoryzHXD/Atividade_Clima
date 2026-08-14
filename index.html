@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consulta Climática</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="card">
+    <h1>🌤️ Consultar Clima</h1>
+
+    <div class="controles">
+      <input type="text" id="city" placeholder="Digite o nome da cidade" />
+      <select id="method">
+        <option value="fetch">Fetch</option>
+        <option value="axios">Axios</option>
+      </select>
+      <button id="btnBuscar" type="button">Consultar</button>
+    </div>
+
+    <div id="loading" class="loading oculto">Carregando...</div>
+    <div id="result"></div>
+    <div id="error" class="erro"></div>
+  </main>
+
+  <!-- Axios via CDN (versão fixa para não quebrar o projeto) -->
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.7.9/dist/axios.min.js"></script>
+  <script src="app.js" defer></script>
+</body>
+</html>
