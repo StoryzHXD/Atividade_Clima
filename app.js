@@ -1,3 +1,4 @@
+// ===== 1) CONFIGURAÇÃO =====
 const API_KEY = "7477bdc2adc0320491d11524738c4b00"; // <-- COLE SUA CHAVE AQUI (dentro das aspas)
 const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
 
@@ -8,10 +9,13 @@ function montarUrl(cidade) {
 
 // Traduz o código de status HTTP em uma mensagem amigável
 function mensagemPorStatus(status) {
-  if (status === 401) return "Chave de API inválida ou ainda não ativada. Aguarde alguns minutos.";
+  if (status === 401)
+    return "Chave de API inválida ou ainda não ativada. Aguarde alguns minutos.";
   if (status === 404) return "Cidade não encontrada. Verifique a digitação.";
-  if (status === 429) return "Limite de requisições excedido. Tente novamente em instantes.";
-  if (status >= 500) return "O servidor da API está com problemas. Tente mais tarde.";
+  if (status === 429)
+    return "Limite de requisições excedido. Tente novamente em instantes.";
+  if (status >= 500)
+    return "O servidor da API está com problemas. Tente mais tarde.";
   return "Ocorreu um erro inesperado na requisição.";
 }
 
@@ -19,7 +23,9 @@ function mensagemPorStatus(status) {
 async function fetchWeather(cidade) {
   try {
     // AbortSignal.timeout cancela a requisição se passar de 8 segundos
-    const response = await fetch(montarUrl(cidade), { signal: AbortSignal.timeout(8000) });
+    const response = await fetch(montarUrl(cidade), {
+      signal: AbortSignal.timeout(8000),
+    });
 
     // ATENÇÃO: o fetch NÃO joga erro em 404/401. Precisamos verificar manualmente!
     if (!response.ok) {
@@ -50,7 +56,9 @@ async function axiosWeather(cidade) {
       displayError(mensagemPorStatus(error.response.status));
     } else if (error.request) {
       // O pedido saiu, mas não houve resposta
-      displayError("Sem resposta da API. Verifique sua conexão com a internet.");
+      displayError(
+        "Sem resposta da API. Verifique sua conexão com a internet.",
+      );
     } else {
       displayError("Erro ao montar a requisição: " + error.message);
     }
@@ -90,7 +98,9 @@ async function getWeather() {
   }
 
   if (API_KEY === "SUA_CHAVE_AQUI") {
-    displayError("Você esqueceu de colocar sua chave da API no arquivo app.js!");
+    displayError(
+      "Você esqueceu de colocar sua chave da API no arquivo app.js!",
+    );
     return;
   }
 
